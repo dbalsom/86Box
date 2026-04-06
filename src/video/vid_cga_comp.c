@@ -259,8 +259,8 @@ Composite_Process(uint8_t cgamode, uint8_t border, uint32_t blocks /*, bool doub
     for (uint8_t x = 0; x < 5; ++x)
         OUT(b[x & 3]);
 
-    if ((cgamode & CGA_MODE_FLAG_BW) != 0) {
-        /* Decode */
+    if ((cgamode & (CGA_MODE_FLAG_BW | CGA_MODE_FLAG_HIGHRES) != 0) {
+        /* Decode without chroma. Colorburst is disabled by BW and HIRES bits */
         i    = temp + 5;
         srgb = TempLine;
         for (x2 = 0; x2 < blocks * 4; ++x2) {
